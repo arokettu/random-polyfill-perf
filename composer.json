@@ -1,0 +1,10 @@
+{
+    "repositories": [{
+        "type": "vcs",
+        "url": "../random-polyfill"
+    }],
+    "require": {
+        "php": ">= 7.1",
+        "arokettu/random-polyfill": "dev-no-gmp"
+    }
+}
