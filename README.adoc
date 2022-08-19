@@ -43,13 +43,13 @@ All tests were run on PHP 7.4 except for native.
 
 |brick/math
 |2706.6810
-|2706.6810
+|2405.2248
 |14.2810
 |665554.69*
 |148175.72*
 |===
 
-* approximately, I used 100 iterations, then multipiled by 100
++*+ approximately, I used 100 iterations, then multipiled by 100
 
 == nextInt()
 
@@ -94,6 +94,8 @@ All tests were run on PHP 7.4 except for native.
 |2383.1699
 |2419.9281
 |1266.5899
-|718118.50
-|149826.31
+|718118.50*
+|149826.31*
 |===
+
++*+ approximately, I used 100 iterations, then multipiled by 100
