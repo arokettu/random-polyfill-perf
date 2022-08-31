@@ -27,7 +27,15 @@ foreach ($engines as $name => $engine) {
         $r->getInt(0, 65535);
     }
 
-    echo $name, ': getInt(): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
+    echo $name, ': getInt(65535): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
+
+    $time = microtime(true);
+
+    for ($i = 0; $i < 10000; $i++) {
+        $r->getInt(0, 31337);
+    }
+
+    echo $name, ': getInt(31337): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
 
     $time = microtime(true);
 
@@ -36,4 +44,6 @@ foreach ($engines as $name => $engine) {
     }
 
     echo $name, ': nextInt(): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
+
+    echo PHP_EOL;
 }

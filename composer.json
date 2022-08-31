@@ -5,6 +5,6 @@
     }],
     "require": {
         "php": ">= 7.1",
-        "arokettu/random-polyfill": "dev-no-gmp"
+        "arokettu/random-polyfill": "dev-optional-gmp"
     }
 }

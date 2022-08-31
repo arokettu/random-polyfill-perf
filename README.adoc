@@ -20,13 +20,6 @@ All tests were run on PHP 7.4 except for native.
 |0.1879
 |0.1791
 
-|GMP
-|61.4810
-|52.3708
-|15.5489
-|51.1160
-|55.7959
-
 |brick/math + GMP
 |680.0640
 |544.2760
@@ -47,9 +40,84 @@ All tests were run on PHP 7.4 except for native.
 |14.2810
 |665554.69*
 |148175.72*
+
+|GMP (pure)
+|81.3060
+|61.1298
+|15.0621
+|68.8350
+|69.6700
+
+|GMP (with native)
+|64.3971
+|49.3791
+|15.3942
+|72.2349
+|71.3601
+
+|arokettu/unsigned (pure)
+|211.5788
+|161.4220
+|15.3000
+|809.0341
+|444.5179
+
+|arokettu/unsigned (with native)
+|77.7669
+|47.9591
+|15.5241
+|812.5141
+|445.7359
 |===
 
 +*+ approximately, I used 100 iterations, then multipiled by 100
+
+== getInt(0, 31337)
+
+[%header,cols="3,2,2,2,2,2"]
+|===
+|Env
+|MT
+|MT (legacy)
+|Secure
+|PCG
+|xoshiro256**
+
+|Native (PHP 8.2)
+|0.2429
+|0.1900
+|2.5480
+|0.2141
+|0.1950
+
+|GMP (pure)
+|97.1990
+|60.7409
+|15.3241
+|83.5521
+|85.1860
+
+|GMP (with native)
+|75.1860
+|49.6209
+|15.4719
+|87.3959
+|88.5129
+
+|arokettu/unsigned (pure)
+|348.4030
+|162.9610
+|15.0840
+|968.3399
+|600.8251
+
+|arokettu/unsigned (with native)
+|89.1070
+|47.2190
+|14.9260
+|977.1240
+|608.5520
+|===
 
 == nextInt()
 
@@ -68,13 +136,6 @@ All tests were run on PHP 7.4 except for native.
 |2.4838
 |0.1061
 |0.1271
-
-|GMP
-|40.9720
-|41.6300
-|19.0270
-|37.4460
-|42.7251
 
 |brick/math + GMP
 |526.6640
@@ -96,6 +157,34 @@ All tests were run on PHP 7.4 except for native.
 |1266.5899
 |718118.50*
 |149826.31*
+
+|GMP (pure)
+|51.7659
+|49.7510
+|18.2960
+|49.1860
+|50.1420
+
+|GMP (with native)
+|38.5940
+|41.5320
+|18.7600
+|53.2591
+|53.4332
+
+|arokettu/unsigned (pure)
+|160.0840
+|159.1761
+|50.1299
+|785.6021
+|420.5632
+
+|arokettu/unsigned (with native)
+|68.2628
+|69.2351
+|53.0319
+|801.6431
+|428.5960
 |===
 
 +*+ approximately, I used 100 iterations, then multipiled by 100
