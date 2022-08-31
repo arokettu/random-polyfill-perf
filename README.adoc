@@ -4,7 +4,7 @@ All tests were run on PHP 7.4 except for native.
 
 == getInt(0, 65535)
 
-[%header,cols="3,2,2,2,2,2"]
+[%header,cols="3,>2,>2,>2,>2,>2"]
 |===
 |Env
 |MT
@@ -74,7 +74,7 @@ All tests were run on PHP 7.4 except for native.
 
 == getInt(0, 31337)
 
-[%header,cols="3,2,2,2,2,2"]
+[%header,cols="3,>2,>2,>2,>2,>2"]
 |===
 |Env
 |MT
@@ -121,7 +121,7 @@ All tests were run on PHP 7.4 except for native.
 
 == nextInt()
 
-[%header,cols="3,2,2,2,2,2"]
+[%header,cols="3,>2,>2,>2,>2,>2"]
 |===
 |Env
 |MT
