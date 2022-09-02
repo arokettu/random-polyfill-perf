@@ -5,83 +5,12 @@ All tests were run on 64 bit PHP 7.4 except for native.
 == Engines
 
 * Native: PHP 8.2 extension
-* `brick/math`: abandoned extension-less version based on the `brick/math` package
 * GMP (pure): GMP based Math implementation with native fallback disabled
 * GMP (with native): GMP based Math implementation that uses regular PHP math when int size allows
 * `arokettu/unsigned` (pure): `arokettu/unsigned` based Math implementation with native fallback disabled
 * `arokettu/unsigned` (with native):  `arokettu/unsigned` based Math implementation that uses regular PHP math when int size allows
 
 Time in tables is milliseconds for 10000 iterations
-
-== getInt(0, 65535)
-
-[%header,cols="3,>2,>2,>2,>2,>2"]
-|===
-|Env
-|MT
-|MT (legacy)
-|Secure
-|PCG
-|xoshiro256**
-
-|Native (PHP 8.2)
-|0.1860
-|0.1731
-|2.5280
-|0.1879
-|0.1791
-
-|brick/math + GMP
-|680.0640
-|544.2760
-|15.9061
-|552.4859
-|747.3629
-
-|brick/math + bcmath
-|3597.6019
-|3243.9330
-|14.3719
-|5762.5852
-|8369.9131
-
-|brick/math
-|2706.6810
-|2405.2248
-|14.2810
-|665554.69*
-|148175.72*
-
-|GMP (pure)
-|81.3060
-|61.1298
-|15.0621
-|68.8350
-|69.6700
-
-|GMP (with native)
-|64.3971
-|49.3791
-|15.3942
-|72.2349
-|71.3601
-
-|arokettu/unsigned (pure)
-|211.5788
-|161.4220
-|15.3000
-|809.0341
-|444.5179
-
-|arokettu/unsigned (with native)
-|77.7669
-|47.9591
-|15.5241
-|812.5141
-|445.7359
-|===
-
-+*+ approximately, I used 100 iterations, then multipiled by 100
 
 == getInt(0, 31337)
 
@@ -95,39 +24,182 @@ Time in tables is milliseconds for 10000 iterations
 |xoshiro256**
 
 |Native (PHP 8.2)
-|0.2429
-|0.1900
-|2.5480
-|0.2141
-|0.1950
+|0.2100
+|0.1762
+|2.4850
+|0.2010
+|0.1841
 
 |GMP (pure)
-|97.1990
-|60.7409
-|15.3241
-|83.5521
-|85.1860
+|100.9951
+|62.3538
+|14.3442
+|94.8739
+|94.2910
 
 |GMP (with native)
-|75.1860
-|49.6209
-|15.4719
-|87.3959
-|88.5129
+|74.0681
+|48.1200
+|14.9732
+|88.5611
+|86.2379
 
 |arokettu/unsigned (pure)
-|348.4030
-|162.9610
-|15.0840
-|968.3399
-|600.8251
+|371.6528
+|180.3360
+|15.3091
+|1052.7899
+|667.9280
 
 |arokettu/unsigned (with native)
-|89.1070
-|47.2190
-|14.9260
-|977.1240
-|608.5520
+|94.8339
+|52.9518
+|14.8571
+|885.0820
+|503.4778
+|===
+
+== getInt(0, 65535)
+
+[%header,cols="3,>2,>2,>2,>2,>2"]
+|===
+|Env
+|MT
+|MT (legacy)
+|Secure
+|PCG
+|xoshiro256**
+
+|Native (PHP 8.2)
+|0.1891
+|0.1740
+|2.5680
+|0.1931
+|0.1781
+
+|GMP (pure)
+|85.9890
+|61.7640
+|14.7440
+|77.2500
+|76.4370
+
+|GMP (with native)
+|64.5752
+|47.8380
+|15.2171
+|77.8880
+|76.3440
+
+|arokettu/unsigned (pure)
+|228.1661
+|176.2259
+|16.9029
+|898.9370
+|511.1558
+
+|arokettu/unsigned (with native)
+|86.4980
+|53.0460
+|14.8900
+|875.4082
+|475.3609
+|===
+
+== getInt(0, 4398046511103)
+
+2^42^ range
+
+[%header,cols="3,>2,>2,>2,>2,>2"]
+|===
+|Env
+|MT
+|MT (legacy)
+|Secure
+|PCG
+|xoshiro256**
+
+|Native (PHP 8.2)
+|0.1190
+|0.1111
+|2.4230
+|0.1070
+|0.1061
+
+|GMP (pure)
+|51.8270
+|51.0380
+|19.0630
+|50.6661
+|48.5060
+
+|GMP (with native)
+|39.1610
+|38.5571
+|18.9540
+|54.1821
+|54.8799
+
+|arokettu/unsigned (pure)
+|172.4589
+|179.5690
+|57.7998
+|869.6311
+|466.7051
+
+|arokettu/unsigned (with native)
+|74.2991
+|75.5711
+|59.1249
+|867.0979
+|468.2000
+|===
+
+== getInt(0, 8027757784328)
+
+[%header,cols="3,>2,>2,>2,>2,>2"]
+|===
+|Env
+|MT
+|MT (legacy)
+|Secure
+|PCG
+|xoshiro256**
+
+|Native (PHP 8.2)
+|0.1101
+|0.1140
+|2.4190
+|0.1080
+|0.1051
+
+|GMP (pure)
+|51.9390
+|51.7831
+|19.9521
+|49.9799
+|49.2518
+
+|GMP (with native)
+|38.8160
+|38.5540
+|19.2590
+|54.9951
+|55.8069
+
+|arokettu/unsigned (pure)
+|178.8239
+|180.3510
+|55.2990
+|898.5500
+|461.8030
+
+|arokettu/unsigned (with native)
+|76.9641
+|75.8362
+|55.7489
+|871.0020
+|465.8620
 |===
 
 == nextInt()
@@ -142,60 +214,37 @@ Time in tables is milliseconds for 10000 iterations
 |xoshiro256**
 
 |Native (PHP 8.2)
-|0.1109
-|0.1099
-|2.4838
+|0.1152
+|0.1121
+|2.3980
 |0.1061
-|0.1271
-
-|brick/math + GMP
-|526.6640
-|530.4639
-|80.7271
-|415.9460
-|610.4870
-
-|brick/math + bcmath
-|3252.0561
-|3229.5029
-|323.1668
-|5249.2309
-|8450.3100
-
-|brick/math
-|2383.1699
-|2419.9281
-|1266.5899
-|718118.50*
-|149826.31*
+|0.1061
 
 |GMP (pure)
-|51.7659
-|49.7510
-|18.2960
-|49.1860
-|50.1420
+|51.8341
+|52.1219
+|18.7290
+|49.4230
+|48.8160
 
 |GMP (with native)
-|38.5940
-|41.5320
-|18.7600
-|53.2591
-|53.4332
+|39.1228
+|39.4158
+|19.2521
+|53.7970
+|55.5940
 
 |arokettu/unsigned (pure)
-|160.0840
-|159.1761
-|50.1299
-|785.6021
-|420.5632
+|179.3399
+|174.0091
+|55.9680
+|862.1161
+|458.1618
 
 |arokettu/unsigned (with native)
-|68.2628
-|69.2351
-|53.0319
-|801.6431
-|428.5960
+|74.4288
+|75.4352
+|56.9661
+|865.6659
+|473.1519
 |===
-
-+*+ approximately, I used 100 iterations, then multipiled by 100

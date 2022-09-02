@@ -18,17 +18,11 @@ $engines = [
     'xoshiro' => new Xoshiro256StarStar(),
 ];
 
-foreach ($engines as $name => $engine) {
-    $r = new Randomizer($engine);
+$randomizers = array_map(function ($e) {
+    return new Randomizer($e);
+}, $engines);
 
-    $time = microtime(true);
-
-    for ($i = 0; $i < 10000; $i++) {
-        $r->getInt(0, 65535);
-    }
-
-    echo $name, ': getInt(65535): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
-
+foreach ($randomizers as $name => $r) {
     $time = microtime(true);
 
     for ($i = 0; $i < 10000; $i++) {
@@ -36,7 +30,47 @@ foreach ($engines as $name => $engine) {
     }
 
     echo $name, ': getInt(31337): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
+}
 
+echo PHP_EOL;
+
+foreach ($randomizers as $name => $r) {
+    $time = microtime(true);
+
+    for ($i = 0; $i < 10000; $i++) {
+        $r->getInt(0, 65535);
+    }
+
+    echo $name, ': getInt(65535): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
+}
+
+echo PHP_EOL;
+
+foreach ($randomizers as $name => $r) {
+    $time = microtime(true);
+
+    for ($i = 0; $i < 10000; $i++) {
+        $r->nextInt();
+    }
+
+    echo $name, ': getInt(4398046511103): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
+}
+
+echo PHP_EOL;
+
+foreach ($randomizers as $name => $r) {
+    $time = microtime(true);
+
+    for ($i = 0; $i < 10000; $i++) {
+        $r->nextInt();
+    }
+
+    echo $name, ': getInt(8027757784328): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
+}
+
+echo PHP_EOL;
+
+foreach ($randomizers as $name => $r) {
     $time = microtime(true);
 
     for ($i = 0; $i < 10000; $i++) {
@@ -44,6 +78,4 @@ foreach ($engines as $name => $engine) {
     }
 
     echo $name, ': nextInt(): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
-
-    echo PHP_EOL;
 }
