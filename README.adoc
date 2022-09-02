@@ -1,6 +1,17 @@
 = Random polyfill performance
 
-All tests were run on PHP 7.4 except for native.
+All tests were run on 64 bit PHP 7.4 except for native.
+
+== Engines
+
+* Native: PHP 8.2 extension
+* `brick/math` abandoned extension-less version based in the `brick/math` package
+* GMP (pure): GMP based Math implementation with native fallback disabled
+* GMP (with native): GMP based Math implementation that uses regular PHP math when int size allows
+* `arokettu/unsigned` (pure): `arokettu/unsigned` based Math implementation with native fallback disabled
+* `arokettu/unsigned` (with native):  `arokettu/unsigned` based Math implementation that uses regular PHP math when int size allows
+
+Time in tables is milliseconds for 10000 iterations
 
 == getInt(0, 65535)
 
