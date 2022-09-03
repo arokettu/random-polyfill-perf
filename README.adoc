@@ -1,14 +1,12 @@
 = Random polyfill performance
 
-All tests were run on 64 bit PHP 7.4 except for native.
-
 == Engines
 
 * Native: PHP 8.2 extension
 * GMP (pure): GMP based Math implementation with native fallback disabled
 * GMP (with native): GMP based Math implementation that uses regular PHP math when int size allows
-* `arokettu/unsigned` (pure): `arokettu/unsigned` based Math implementation with native fallback disabled
-* `arokettu/unsigned` (with native):  `arokettu/unsigned` based Math implementation that uses regular PHP math when int size allows
+* unsigned (pure): `arokettu/unsigned` based Math implementation with native fallback disabled
+* unsigned (with native):  `arokettu/unsigned` based Math implementation that uses regular PHP math when int size allows
 
 Time in tables is milliseconds for 10000 iterations
 
@@ -24,39 +22,95 @@ Time in tables is milliseconds for 10000 iterations
 |xoshiro256**
 
 |Native (PHP 8.2)
-|0.2100
+|0.1910
+|0.1888
+|2.3201
 |0.1762
-|2.4850
-|0.2010
-|0.1841
+|0.1709
 
-|GMP (pure)
-|100.9951
-|62.3538
-|14.3442
-|94.8739
-|94.2910
+|GMP (pure, PHP 7.4)
+|93.4741
+|56.9482
+|14.3511
+|89.9811
+|89.4001
 
-|GMP (with native)
-|74.0681
-|48.1200
-|14.9732
-|88.5611
-|86.2379
+|GMP (with native, PHP 7.4)
+|69.4458
+|46.0219
+|14.1439
+|83.3030
+|82.0200
 
-|arokettu/unsigned (pure)
-|371.6528
-|180.3360
-|15.3091
-|1052.7899
-|667.9280
+|unsigned (pure, PHP 7.4)
+|341.9800
+|151.6271
+|15.1100
+|993.4919
+|523.6130
 
-|arokettu/unsigned (with native)
-|94.8339
-|52.9518
-|14.8571
-|885.0820
-|503.4778
+|unsigned (with native, PHP 7.4)
+|93.5431
+|49.8610
+|14.5760
+|860.5812
+|298.6481
+
+|GMP (pure, PHP 8.0)
+|37.7910
+|21.3721
+|4.3058
+|34.9529
+|36.4590
+
+|GMP (with native, PHP 8.0)
+|15.6682
+|9.2499
+|4.2801
+|22.6390
+|26.7739
+
+|unsigned (pure, PHP 8.0)
+|54.0380
+|24.2620
+|4.1199
+|124.2402
+|67.1079
+
+|unsigned (with native, PHP 8.0)
+|15.9390
+|8.9068
+|4.0901
+|102.4220
+|42.5549
+
+|GMP (pure, PHP 8.0 + jit)
+|35.1241
+|19.8560
+|4.0190
+|34.4820
+|35.3439
+
+|GMP (with native, PHP 8.0 + jit)
+|15.3508
+|8.9240
+|4.1702
+|22.4671
+|26.6099
+
+|unsigned (pure, PHP 8.0 + jit)
+|56.6559
+|26.0489
+|4.4301
+|131.9449
+|69.4661
+
+|unsigned (with native, PHP 8.0 + jit)
+|15.8591
+|8.7309
+|3.9902
+|96.6210
+|53.6170
 |===
 
 == getInt(0, 65535)
@@ -71,39 +125,95 @@ Time in tables is milliseconds for 10000 iterations
 |xoshiro256**
 
 |Native (PHP 8.2)
-|0.1891
-|0.1740
-|2.5680
-|0.1931
-|0.1781
+|0.2239
+|0.1791
+|2.6109
+|0.3028
+|0.2201
 
-|GMP (pure)
-|85.9890
-|61.7640
-|14.7440
-|77.2500
-|76.4370
+|GMP (pure, PHP 7.4)
+|87.7559
+|67.4679
+|16.0780
+|92.7439
+|85.9210
 
-|GMP (with native)
-|64.5752
-|47.8380
-|15.2171
-|77.8880
-|76.3440
+|GMP (with native, PHP 7.4)
+|67.3909
+|53.3068
+|27.0002
+|93.6589
+|79.0360
 
-|arokettu/unsigned (pure)
-|228.1661
-|176.2259
-|16.9029
-|898.9370
-|511.1558
+|unsigned (pure, PHP 7.4)
+|217.0920
+|182.9460
+|15.9240
+|927.9411
+|329.0510
 
-|arokettu/unsigned (with native)
-|86.4980
-|53.0460
-|14.8900
-|875.4082
-|475.3609
+|unsigned (with native, PHP 7.4)
+|79.4959
+|48.0421
+|15.9039
+|845.5908
+|289.8028
+
+|GMP (pure, PHP 8.0)
+|31.0321
+|21.4400
+|4.5471
+|28.5790
+|29.6571
+
+|GMP (with native, PHP 8.0)
+|14.9398
+|9.3992
+|4.3659
+|20.7870
+|24.3368
+
+|unsigned (pure, PHP 8.0)
+|53.5109
+|30.3700
+|4.1850
+|107.5001
+|46.5841
+
+|unsigned (with native, PHP 8.0)
+|15.1210
+|9.2790
+|4.1289
+|137.1930
+|46.0861
+
+|GMP (pure, PHP 8.0 + jit)
+|31.7960
+|22.4090
+|4.5390
+|31.1811
+|49.1648
+
+|GMP (with native, PHP 8.0 + jit)
+|21.8580
+|11.0509
+|6.2821
+|36.9179
+|25.2290
+
+|unsigned (pure, PHP 8.0 + jit)
+|45.2402
+|28.4171
+|5.4131
+|117.3511
+|47.7800
+
+|unsigned (with native, PHP 8.0 + jit)
+|26.8240
+|11.9140
+|4.2870
+|105.2918
+|43.0520
 |===
 
 == getInt(0, 4398046511103)
@@ -119,40 +229,89 @@ Time in tables is milliseconds for 10000 iterations
 |PCG
 |xoshiro256**
 
-|Native (PHP 8.2)
-|0.1190
-|0.1111
-|2.4230
-|0.1070
-|0.1061
+|GMP (pure, PHP 7.4)
+|120.8329
+|63.5009
+|16.3929
+|77.5220
+|75.0251
 
-|GMP (pure)
-|51.8270
-|51.0380
-|19.0630
-|50.6661
-|48.5060
+|GMP (with native, PHP 7.4)
+|89.9680
+|48.2569
+|15.0070
+|76.3280
+|76.8890
 
-|GMP (with native)
-|39.1610
-|38.5571
-|18.9540
-|54.1821
-|54.8799
+|unsigned (pure, PHP 7.4)
+|324.8751
+|166.4760
+|14.8919
+|896.4381
+|326.3700
 
-|arokettu/unsigned (pure)
-|172.4589
-|179.5690
-|57.7998
-|869.6311
-|466.7051
+|unsigned (with native, PHP 7.4)
+|132.6871
+|47.0560
+|14.9121
+|984.9789
+|354.9368
 
-|arokettu/unsigned (with native)
-|74.2991
-|75.5711
-|59.1249
-|867.0979
-|468.2000
+|GMP (pure, PHP 8.0)
+|53.0291
+|27.5202
+|5.1031
+|29.5870
+|34.1179
+
+|GMP (with native, PHP 8.0)
+|28.8050
+|10.9591
+|5.0159
+|29.3519
+|30.3178
+
+|unsigned (pure, PHP 8.0)
+|57.6389
+|29.2900
+|4.9171
+|117.5661
+|50.6191
+
+|unsigned (with native, PHP 8.0)
+|29.0170
+|10.6339
+|4.8959
+|122.1991
+|50.9260
+
+|GMP (pure, PHP 8.0 + jit)
+|52.5839
+|26.1600
+|5.0042
+|28.4290
+|31.7390
+
+|GMP (with native, PHP 8.0 + jit)
+|26.4370
+|10.6652
+|4.8790
+|26.5031
+|30.3481
+
+|unsigned (pure, PHP 8.0 + jit)
+|58.5530
+|29.7310
+|5.0991
+|119.6592
+|50.6580
+
+|unsigned (with native, PHP 8.0 + jit)
+|28.7530
+|10.6239
+|4.8931
+|119.7159
+|52.8450
 |===
 
 == getInt(0, 8027757784328)
@@ -167,39 +326,95 @@ Time in tables is milliseconds for 10000 iterations
 |xoshiro256**
 
 |Native (PHP 8.2)
-|0.1101
-|0.1140
-|2.4190
-|0.1080
-|0.1051
+|0.2670
+|0.1950
+|2.9020
+|0.2189
+|0.2151
 
-|GMP (pure)
-|51.9390
-|51.7831
-|19.9521
-|49.9799
-|49.2518
+|GMP (pure, PHP 7.4)
+|281.5030
+|129.2100
+|26.2079
+|151.8421
+|134.7508
 
-|GMP (with native)
-|38.8160
-|38.5540
-|19.2590
-|54.9951
-|55.8069
+|GMP (with native, PHP 7.4)
+|141.5122
+|62.0620
+|20.0241
+|113.9612
+|124.3560
 
-|arokettu/unsigned (pure)
-|178.8239
-|180.3510
-|55.2990
-|898.5500
-|461.8030
+|unsigned (pure, PHP 7.4)
+|656.7569
+|212.1301
+|19.9201
+|1448.3778
+|612.6771
 
-|arokettu/unsigned (with native)
-|76.9641
-|75.8362
-|55.7489
-|871.0020
-|465.8620
+|unsigned (with native, PHP 7.4)
+|357.3282
+|59.5222
+|17.9949
+|1433.1498
+|857.6670
+
+|GMP (pure, PHP 8.0)
+|77.4250
+|32.7089
+|6.1529
+|43.4132
+|43.4909
+
+|GMP (with native, PHP 8.0)
+|39.1650
+|12.2030
+|5.5730
+|40.7341
+|42.9871
+
+|unsigned (pure, PHP 8.0)
+|98.0768
+|32.4311
+|5.3439
+|157.4032
+|85.4580
+
+|unsigned (with native, PHP 8.0)
+|60.7970
+|10.9351
+|5.0750
+|153.5189
+|80.8699
+
+|GMP (pure, PHP 8.0 + jit)
+|58.1799
+|25.7139
+|5.0611
+|35.2449
+|40.5571
+
+|GMP (with native, PHP 8.0 + jit)
+|38.0931
+|12.3658
+|5.5110
+|38.9900
+|42.6030
+
+|unsigned (pure, PHP 8.0 + jit)
+|94.5380
+|36.7341
+|5.8110
+|171.3810
+|92.6001
+
+|unsigned (with native, PHP 8.0 + jit)
+|69.0429
+|11.9891
+|5.5499
+|170.1572
+|100.6751
 |===
 
 == nextInt()
@@ -220,31 +435,94 @@ Time in tables is milliseconds for 10000 iterations
 |0.1061
 |0.1061
 
-|GMP (pure)
-|51.8341
-|52.1219
-|18.7290
-|49.4230
-|48.8160
+|Native (PHP 8.2)
+|0.1500
+|0.1521
+|3.1459
+|0.1361
+|0.1359
 
-|GMP (with native)
-|39.1228
-|39.4158
-|19.2521
-|53.7970
-|55.5940
+|GMP (pure, PHP 7.4)
+|66.7429
+|65.2230
+|23.3750
+|65.8541
+|64.3401
 
-|arokettu/unsigned (pure)
-|179.3399
-|174.0091
-|55.9680
-|862.1161
-|458.1618
+|GMP (with native, PHP 7.4)
+|44.8592
+|44.9109
+|22.7249
+|63.3199
+|64.1191
 
-|arokettu/unsigned (with native)
-|74.4288
-|75.4352
-|56.9661
-|865.6659
-|473.1519
+|unsigned (pure, PHP 7.4)
+|178.1209
+|181.1011
+|65.1550
+|1363.9622
+|533.9251
+
+|unsigned (with native, PHP 7.4)
+|146.3640
+|127.5470
+|88.8419
+|1402.2901
+|380.8098
+
+|GMP (pure, PHP 8.0)
+|23.8309
+|23.5071
+|7.0629
+|18.4021
+|21.7891
+
+|GMP (with native, PHP 8.0)
+|10.8209
+|11.0891
+|7.7102
+|20.5460
+|23.1831
+
+|unsigned (pure, PHP 8.0)
+|30.0810
+|30.1321
+|11.9710
+|113.5049
+|44.1461
+
+|unsigned (with native, PHP 8.0)
+|13.4571
+|13.3049
+|11.2321
+|110.3179
+|44.5249
+
+|GMP (pure, PHP 8.0 + jit)
+|22.9011
+|23.3819
+|7.0801
+|19.8920
+|24.7350
+
+|GMP (with native, PHP 8.0 + jit)
+|10.6189
+|10.0679
+|7.4699
+|21.3821
+|24.0490
+
+|unsigned (pure, PHP 8.0 + jit)
+|31.8689
+|32.3129
+|13.0768
+|130.0039
+|53.7870
+
+|unsigned (with native, PHP 8.0 + jit)
+|16.2871
+|16.2330
+|13.3390
+|125.3052
+|48.2640
 |===

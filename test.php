@@ -8,6 +8,12 @@ use Random\Randomizer;
 
 require __DIR__ . '/vendor/autoload.php';
 
+if (function_exists('opcache_get_status')) {
+    var_dump(opcache_get_status()['jit']);
+} else {
+    var_dump('opcache is not installed');
+}
+
 // generate 10000 getInt and 10000 nextInt
 
 $engines = [
@@ -50,7 +56,7 @@ foreach ($randomizers as $name => $r) {
     $time = microtime(true);
 
     for ($i = 0; $i < 10000; $i++) {
-        $r->nextInt();
+        $r->getInt(0, 4398046511103);
     }
 
     echo $name, ': getInt(4398046511103): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
@@ -62,7 +68,7 @@ foreach ($randomizers as $name => $r) {
     $time = microtime(true);
 
     for ($i = 0; $i < 10000; $i++) {
-        $r->nextInt();
+        $r->getInt(0, 8027757784328);
     }
 
     echo $name, ': getInt(8027757784328): ', sprintf("%.4f", (microtime(true) - $time) * 1000), PHP_EOL;
